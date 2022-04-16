@@ -1,7 +1,13 @@
 <template>
-	<header display-flex justify-center p="2">
+	<header display-flex justify-center p="2" bg="white">
 		<div display-flex w="xl">
-			<input type="text" flex="1" border="1 gray-300 focus-within:blue-300" p="x-2 y-1" />
+			<input
+				type="text"
+				flex="1"
+				border="1 gray-300 focus-within:blue-300"
+				p="x-2 y-1"
+				placeholder="Search..."
+			/>
 			<button
 				type="submit"
 				border="1 l-0 gray-300"
