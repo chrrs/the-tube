@@ -2,6 +2,8 @@
 import { Video } from '~/lib/api';
 import { format } from 'date-fns';
 import DOMPurify from 'dompurify';
+import linkifyHtml from 'linkify-html';
+import 'linkify-plugin-hashtag';
 
 const route = useRoute();
 const id = route.query.v;
@@ -19,6 +21,21 @@ const description = computed(() => {
 
 	let description = info.value.metadata.description;
 	description = DOMPurify.sanitize(description, { ALLOWED_TAGS: ['br', 'a'] });
+	description = linkifyHtml(description, {
+		formatHref: {
+			hashtag: (href: string) =>
+				'/results?search_query=' + encodeURIComponent(href.substring(1)),
+		},
+	});
+
+	const base = location.origin;
+	description = description
+		.replaceAll(/(?:http(?:s)?:\/\/)?(?:www.)?youtube.com(\/[a-zA-Z0-9?=&]*)/gim, `${base}$1`)
+		.replaceAll(
+			/(?:http(?:s)?:\/\/)?(?:www.)?youtu.be(\/[a-zA-Z0-9?=&]*)/gim,
+			`${base}/watch?v=$1`
+		);
+
 	return description;
 });
 
