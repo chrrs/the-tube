@@ -45,7 +45,7 @@ onMounted(async () => {
 </script>
 
 <template>
-	<div h="[56.25vw]" max-h="[90vh]" id="theatre" :hidden="!theatre"></div>
+	<div id="theatre" h="[56.25vw]" max-h="[90vh]" :hidden="!theatre"></div>
 
 	<div v-if="info" container max-w-7xl mx-auto p="x-4 y-4">
 		<div>

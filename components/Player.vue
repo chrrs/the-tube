@@ -12,8 +12,8 @@ const props = defineProps({
 	video: { type: Object as PropType<Video>, required: true },
 });
 
-const player = ref<HTMLVideoElement>(null as any);
-const plyr = ref<Plyr>(null as any);
+const player = ref<HTMLVideoElement>(null as unknown as HTMLVideoElement);
+const plyr = ref<Plyr>();
 const hls = ref<Hls | null>(null);
 const dash = ref<MediaPlayerClass | null>(null);
 
@@ -57,7 +57,7 @@ onMounted(async () => {
 
 	plyr.value.on('languagechange', () => {
 		setTimeout(() => {
-			if (hls.value) {
+			if (hls.value && plyr.value) {
 				hls.value.subtitleTrack = plyr.value.currentTrack;
 			}
 		}, 50);
@@ -83,7 +83,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
-	plyr.value.destroy();
+	plyr.value?.destroy();
 });
 </script>
 

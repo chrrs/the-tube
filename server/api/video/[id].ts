@@ -3,6 +3,7 @@ import { Video, formatNumber, MediaFormat } from '~/lib/api';
 // @ts-ignore
 export default defineEventHandler(async (event) => {
 	const id = event.context.params.id;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const res: any = await $fetch(`${process.env.PIPED_API}/streams/${id}`);
 
 	let lbry = undefined;
