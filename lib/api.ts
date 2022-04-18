@@ -4,11 +4,13 @@ export interface Video {
 	dash?: string;
 	lbry?: string;
 	formats: MediaFormat[];
+	related: VideoMetadata[];
 }
 
 export interface VideoMetadata {
+	id: string;
 	title: string;
-	description: string;
+	description?: string;
 	publishDate: string;
 	live: boolean;
 	views: number;
@@ -40,15 +42,9 @@ export interface AudioFormat {
 export interface ChannelInfo {
 	id: string;
 	name: string;
-	subscribers: string;
-	avatar: string;
+	subscribers?: string;
+	avatar?: string;
 	verified: boolean;
-}
-
-export interface Image {
-	url: string;
-	width: number;
-	height: number;
 }
 
 export function formatNumber(num: number): string {

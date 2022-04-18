@@ -41,13 +41,14 @@ export default defineEventHandler(async (event) => {
 
 	return {
 		metadata: {
+			id,
 			title: res.title,
 			description: res.description,
 			publishDate: res.uploadDate,
 			live: res.livestream,
 			views: res.views,
 			lengthSeconds: res.duration,
-			thumbnail: new URL(`/vi_webp/${id}/maxresdefault.webp`, res.proxyUrl).href,
+			thumbnail: new URL(`/vi/${id}/maxresdefault.jpg`, res.proxyUrl).href,
 			author: {
 				id: res.uploaderUrl.split('/').pop(),
 				name: res.uploader,
@@ -60,5 +61,25 @@ export default defineEventHandler(async (event) => {
 		dash: res.dash || undefined,
 		lbry,
 		formats,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		related: res.relatedStreams.map((related: any) => {
+			const id = related.url.split('?v=').pop();
+
+			return {
+				id,
+				title: related.title,
+				publishDate: new Date(related.uploaded).toISOString(),
+				live: false,
+				views: related.views,
+				lengthSeconds: related.duration,
+				thumbnail: related.thumbnail,
+				author: {
+					id: related.uploaderUrl.split('/').pop(),
+					name: related.uploaderName,
+					avatar: related.uploaderAvatar,
+					verified: related.uploaderVerified,
+				},
+			};
+		}),
 	} as Video;
 });
