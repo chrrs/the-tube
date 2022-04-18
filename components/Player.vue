@@ -7,6 +7,7 @@ import type { MediaPlayerClass } from 'dashjs';
 
 import 'plyr/dist/plyr.css';
 
+const emit = defineEmits(['theatre-toggle']);
 const props = defineProps({
 	video: { type: Object as PropType<Video>, required: true },
 });
@@ -58,6 +59,22 @@ onMounted(async () => {
 		}, 50);
 	});
 
+	const button = document.createElement('button');
+	button.className = 'plyr__controls__item plyr__control';
+	button.setAttribute('type', 'button');
+	button.setAttribute('data-plyr', 'theatre');
+	button.innerHTML =
+		'<svg width="18" height="18" style="fill: transparent">' +
+		'<rect x="1" y="3" width="16" height="12" style="stroke: white; stroke-width: 2"></rect>' +
+		'</svg>' +
+		'<span class="plyr__sr-only">Theatre</span>';
+	button.onclick = () => {
+		emit('theatre-toggle');
+	};
+	document
+		.querySelector('.plyr__controls')
+		?.insertBefore(button, document.querySelector('.plyr__control[data-plyr="fullscreen"]'));
+
 	computeSource(props.video);
 });
 
@@ -67,7 +84,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<video ref="player" controls crossorigin="true" playsinline autoplay></video>
+	<div w-full h-full>
+		<video ref="player" controls crossorigin="true" playsinline autoplay></video>
+	</div>
 </template>
 
 <style>

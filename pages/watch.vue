@@ -6,6 +6,7 @@ import DOMPurify from 'dompurify';
 const route = useRoute();
 const id = route.query.v;
 
+const theatre = ref(false);
 const info = ref<Video | null>(null);
 const published = computed(
 	() => info.value && format(new Date(info.value.metadata.publishDate), 'PPP')
@@ -27,15 +28,15 @@ onMounted(async () => {
 </script>
 
 <template>
-	<!-- <div h="[56.25vw]" max-h="[90vh]">
-		<Player />
-	</div> -->
+	<div h="[56.25vw]" max-h="[90vh]" id="theatre" :hidden="!theatre"></div>
 
 	<div v-if="info" container max-w-7xl mx-auto p="x-4 y-4">
 		<div>
-			<Player :video="info" />
+			<Teleport to="#theatre" :disabled="!theatre">
+				<Player :video="info" @theatre-toggle="() => (theatre = !theatre)" />
+			</Teleport>
 		</div>
-		<div py-4>
+		<div :class="theatre ? 'pb-4' : 'py-4'">
 			<h1 font="semibold" text="lg">{{ info.metadata.title }}</h1>
 			<p mt-1 text="gray-700">
 				{{ info.metadata.views.toLocaleString('en-US') }} views - {{ published }}
