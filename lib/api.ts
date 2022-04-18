@@ -51,6 +51,9 @@ export interface Image {
 }
 
 export function formatNumber(num: number): string {
-	const formatter = Intl.NumberFormat('en-US', { notation: 'compact' });
+	const formatter = Intl.NumberFormat('en-US', {
+		notation: 'compact',
+		maximumSignificantDigits: 10,
+	});
 	return formatter.format(num);
 }
