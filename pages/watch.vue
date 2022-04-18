@@ -56,7 +56,8 @@ onMounted(async () => {
 		<div :class="theatre ? 'pb-4' : 'py-4'">
 			<h1 font="semibold" text="lg">{{ info.metadata.title }}</h1>
 			<p mt-1 text="gray-700">
-				{{ info.metadata.views.toLocaleString('en-US') }} views - {{ published }}
+				{{ info.metadata.views.toLocaleString('en-US') }}
+				{{ info.metadata.live ? ' watching now - Live since' : 'views -' }} {{ published }}
 			</p>
 		</div>
 		<hr border="gray-200" />

@@ -10,6 +10,7 @@ export interface VideoMetadata {
 	title: string;
 	description: string;
 	publishDate: string;
+	live: boolean;
 	views: number;
 	lengthSeconds: number;
 	thumbnail: string;

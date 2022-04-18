@@ -17,25 +17,28 @@ const plyr = ref<Plyr>(null as any);
 const hls = ref<Hls | null>(null);
 const dash = ref<MediaPlayerClass | null>(null);
 
+function loadHls(url: string) {
+	hls.value = new Hls();
+	hls.value.loadSource(url);
+	hls.value.attachMedia(player.value);
+}
+
 async function computeSource(video: Video) {
 	hls.value?.destroy();
 	hls.value = null;
 	dash.value?.destroy();
 	dash.value = null;
 
-	// TODO: Handle livestreams.
-	if (video.lbry && Hls.isSupported()) {
-		hls.value = new Hls();
-		hls.value.loadSource(video.lbry);
-		hls.value.attachMedia(player.value);
+	if (video.metadata.live && video.hls && Hls.isSupported()) {
+		loadHls(video.hls);
+	} else if (video.lbry && Hls.isSupported()) {
+		loadHls(video.lbry);
 	} else if (video.dash) {
 		const { MediaPlayer } = await import('dashjs');
 		dash.value = MediaPlayer().create();
 		dash.value.initialize(player.value, video.dash, true);
 	} else if (video.hls && Hls.isSupported()) {
-		hls.value = new Hls();
-		hls.value.loadSource(video.hls);
-		hls.value.attachMedia(player.value);
+		loadHls(video.hls);
 	}
 }
 
@@ -48,6 +51,7 @@ onMounted(async () => {
 	const Plyr = (await import('plyr')).default;
 	plyr.value = new Plyr(player.value, {
 		settings: ['quality', 'speed'],
+		tooltips: { controls: true },
 		autoplay: true,
 	});
 
@@ -67,7 +71,7 @@ onMounted(async () => {
 		'<svg width="18" height="18" style="fill: transparent">' +
 		'<rect x="1" y="3" width="16" height="12" style="stroke: white; stroke-width: 2"></rect>' +
 		'</svg>' +
-		'<span class="plyr__sr-only">Theatre</span>';
+		'<span class="plyr__tooltip">Theatre mode</span>';
 	button.onclick = () => {
 		emit('theatre-toggle');
 	};

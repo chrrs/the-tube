@@ -43,6 +43,7 @@ export default defineEventHandler(async (event) => {
 			title: res.title,
 			description: res.description,
 			publishDate: res.uploadDate,
+			live: res.livestream,
 			views: res.views,
 			lengthSeconds: res.duration,
 			thumbnail: new URL(`/vi_webp/${id}/maxresdefault.webp`, res.proxyUrl).href,
