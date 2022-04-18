@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Video } from '~/lib/api';
 import { format } from 'date-fns';
+import DOMPurify from 'dompurify';
 
 const route = useRoute();
 const id = route.query.v;
@@ -9,6 +10,16 @@ const info = ref<Video | null>(null);
 const published = computed(
 	() => info.value && format(new Date(info.value.metadata.publishDate), 'PPP')
 );
+
+const description = computed(() => {
+	if (!info.value) {
+		return '';
+	}
+
+	let description = info.value.metadata.description;
+	description = DOMPurify.sanitize(description, { ALLOWED_TAGS: ['br', 'a'] });
+	return description;
+});
 
 onMounted(async () => {
 	info.value = await $fetch(`/api/video/${id}`);
@@ -53,8 +64,14 @@ onMounted(async () => {
 					</h1>
 					<p text="sm gray-700">{{ info.metadata.author.subscribers }} subscribers</p>
 				</div>
-				<p mt-4 whitespace="pre">{{ info.metadata.description }}</p>
+				<p class="description" mt-4 whitespace="pre-line" v-html="description"></p>
 			</div>
 		</div>
 	</div>
 </template>
+
+<style>
+.description a {
+	@apply text-blue-600 hover:underline;
+}
+</style>
