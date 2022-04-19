@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { Video } from '~/lib/api';
-import { format, formatDistanceToNow } from 'date-fns';
+import { format } from 'date-fns';
 import DOMPurify from 'dompurify';
 import linkifyHtml from 'linkify-html';
 import 'linkify-plugin-hashtag';
+import RelatedVideo from '~/components/watch/RelatedVideo.vue';
 
 const route = useRoute();
 let id = route.query.v;
@@ -100,45 +101,7 @@ onMounted(fetchVideo);
 			</div>
 		</div>
 		<div w="2xl:md sm" display="none lg:block">
-			<NuxtLink
-				v-for="related in info.related"
-				:key="related.id"
-				:to="`/watch?v=${related.id}`"
-				display="flex"
-				flex="gap-2"
-				h="auto"
-				mb-4
-			>
-				<img
-					v-lazy="related.thumbnail"
-					:alt="related.title"
-					flex="none basis-[168px]"
-					h="[94px]"
-					bg="gray-200"
-					object-cover
-				/>
-				<div>
-					<h1 font="semibold" text="sm" line-clamp-2>
-						{{ related.title }}
-					</h1>
-					<p mt-1 text="sm gray-700">
-						{{ related.author.name }}
-						<i
-							v-if="related.author.verified"
-							i-ri-check-line
-							align="middle"
-							m="b-0.5"
-							inline-block
-						/>
-					</p>
-					<p text="sm gray-700">
-						{{ related.views.toLocaleString() }} views -
-						{{
-							formatDistanceToNow(new Date(related.publishDate), { addSuffix: true })
-						}}
-					</p>
-				</div>
-			</NuxtLink>
+			<RelatedVideo v-for="related in info.related" :key="related.id" :video="related" />
 		</div>
 	</div>
 </template>
