@@ -34,6 +34,7 @@
 		"linkify-html": "^3.0.5",
 		"linkify-plugin-hashtag": "^3.0.4",
 		"linkifyjs": "^3.0.5",
-		"plyr": "^3.6.12"
+		"plyr": "^3.6.12",
+		"vue3-lazyload": "^0.2.5-beta"
 	}
 }

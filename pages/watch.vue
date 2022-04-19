@@ -110,11 +110,11 @@ onMounted(fetchVideo);
 				mb-4
 			>
 				<img
-					:src="related.thumbnail"
+					v-lazy="related.thumbnail"
 					:alt="related.title"
 					flex="none basis-[168px]"
 					h="[94px]"
-					bg="black"
+					bg="gray-200"
 					object-cover
 				/>
 				<div>
