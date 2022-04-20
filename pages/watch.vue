@@ -5,9 +5,10 @@ import DOMPurify from 'dompurify';
 import linkifyHtml from 'linkify-html';
 import 'linkify-plugin-hashtag';
 import RelatedVideo from '~/components/watch/RelatedVideo.vue';
+import CommentSection from '~/components/watch/CommentSection.vue';
 
 const route = useRoute();
-let id = route.query.v;
+let id = route.query.v?.toString();
 
 const theatre = ref(false);
 const info = ref<Video | null>(null);
@@ -48,7 +49,7 @@ watch(
 	() => route.query.v,
 	() => {
 		info.value = null;
-		id = route.query.v;
+		id = route.query.v?.toString();
 		fetchVideo();
 	}
 );
@@ -98,6 +99,10 @@ onMounted(fetchVideo);
 					</div>
 					<p class="description" mt-4 whitespace="pre-line" v-html="description"></p>
 				</div>
+			</div>
+			<hr border="gray-200" />
+			<div mt-4>
+				<CommentSection :video-id="id || ''" :video="info" />
 			</div>
 		</div>
 		<div w="2xl:md sm" display="none lg:block">

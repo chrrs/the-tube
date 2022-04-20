@@ -4,13 +4,15 @@ import { bestImage, Comments } from '~/lib/api';
 // @ts-ignore
 export default defineEventHandler(async (event) => {
 	const id = event.context.params.id;
-	const replyToken = useQuery(event).replies?.toString();
+	const query = useQuery(event);
+	const replyToken = query.replies?.toString?.();
 
 	let res: CommentsResponse;
 	if (replyToken) {
 		res = await ytcm.getCommentReplies({ videoId: id, replyToken });
 	} else {
-		res = await ytcm.getComments({ videoId: id });
+		const continuation = query.continuation?.toString?.();
+		res = await ytcm.getComments({ videoId: id, continuation });
 	}
 
 	return {
