@@ -81,5 +81,9 @@ export default defineEventHandler(async (event) => {
 				},
 			};
 		}),
+		chapters: res.chapters.map((chapter) => ({
+			title: chapter.title,
+			time: chapter.start,
+		})),
 	} as Video;
 });

@@ -23,7 +23,7 @@ function loadHls(url: string) {
 	hls.value.attachMedia(player.value);
 }
 
-async function computeSource(video: Video) {
+async function updateVideo(video: Video) {
 	hls.value?.destroy();
 	hls.value = null;
 	dash.value?.destroy();
@@ -44,15 +44,23 @@ async function computeSource(video: Video) {
 
 watch(
 	() => props.video,
-	(video) => computeSource(video)
+	(video) => updateVideo(video)
 );
 
 onMounted(async () => {
 	const Plyr = (await import('plyr')).default;
 	plyr.value = new Plyr(player.value, {
-		settings: ['quality', 'speed'],
+		settings: ['quality', 'speed', 'captions'],
 		tooltips: { controls: true },
 		autoplay: true,
+		// @ts-ignore
+		markers: {
+			enabled: true,
+			points: props.video.chapters.map((chapter) => ({
+				time: chapter.time,
+				label: chapter.title,
+			})),
+		},
 	});
 
 	plyr.value.on('languagechange', () => {
@@ -79,7 +87,7 @@ onMounted(async () => {
 		.querySelector('.plyr__controls')
 		?.insertBefore(button, document.querySelector('.plyr__control[data-plyr="fullscreen"]'));
 
-	computeSource(props.video);
+	updateVideo(props.video);
 });
 
 onBeforeUnmount(() => {

@@ -21,7 +21,7 @@ export interface Stream {
 	subtitles: never[];
 	livestream: boolean;
 	proxyUrl: string;
-	chapters: never[];
+	chapters: Chapter[];
 }
 
 export interface MediaStream {
@@ -54,4 +54,10 @@ export interface RelatedStream {
 	views: number;
 	uploaded: number;
 	uploaderVerified: boolean;
+}
+
+export interface Chapter {
+	title: string;
+	image: string;
+	start: number;
 }

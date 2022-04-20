@@ -5,6 +5,7 @@ export interface Video {
 	lbry?: string;
 	formats: MediaFormat[];
 	related: VideoMetadata[];
+	chapters: Chapter[];
 }
 
 export interface VideoMetadata {
@@ -67,6 +68,11 @@ export interface Comment {
 	replies: number;
 	ownerReplied: boolean;
 	replyToken?: string;
+}
+
+export interface Chapter {
+	title: string;
+	time: number;
 }
 
 export interface Image {

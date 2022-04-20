@@ -102,7 +102,7 @@ onMounted(fetchVideo);
 			</div>
 			<hr border="gray-200" />
 			<div mt-4>
-				<CommentSection :video-id="id || ''" :video="info" />
+				<CommentSection :video="info" />
 			</div>
 		</div>
 		<div w="2xl:md sm" display="none lg:block">
