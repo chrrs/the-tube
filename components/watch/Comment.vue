@@ -48,8 +48,8 @@ function toggleExpanded() {
 		<img
 			v-lazy="props.comment.author.avatar"
 			:alt="`${props.comment.author.name}'s avatar`"
-			w-12
-			h-12
+			w-10
+			h-10
 			bg="gray-200"
 			border="rounded-full"
 		/>
