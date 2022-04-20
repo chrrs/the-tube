@@ -21,6 +21,7 @@
 		"typescript": "^4.6.3"
 	},
 	"dependencies": {
+		"@freetube/yt-comment-scraper": "^6.1.0",
 		"@types/dompurify": "^2.3.3",
 		"@unocss/nuxt": "^0.31.3",
 		"@unocss/preset-attributify": "^0.31.5",

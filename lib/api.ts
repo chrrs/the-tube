@@ -47,10 +47,48 @@ export interface ChannelInfo {
 	verified: boolean;
 }
 
+export interface Comments {
+	comments: Comment[];
+	continuation?: string;
+}
+
+export interface Comment {
+	id: string;
+	text: string;
+	time: string;
+	edited: boolean;
+	author: ChannelInfo;
+
+	likes: number;
+	pinned: boolean;
+	hearted: boolean;
+	owner: boolean;
+
+	replies: number;
+	ownerReplied: boolean;
+	replyToken?: string;
+}
+
+export interface Image {
+	url: string;
+	width: number;
+	height: number;
+}
+
 export function formatNumber(num: number): string {
 	const formatter = Intl.NumberFormat('en-US', {
 		notation: 'compact',
 		maximumSignificantDigits: 10,
 	});
 	return formatter.format(num);
+}
+
+export function bestImage(images: Image[]): Image {
+	return images.reduce((best, curr) => {
+		if (curr.width > best.width) {
+			return curr;
+		}
+
+		return best;
+	}, images[0]);
 }
