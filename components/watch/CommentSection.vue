@@ -41,6 +41,7 @@ async function fetch() {
 			:video="props.video"
 			mb-6
 		/>
+		<p v-if="comments && comments.comments.length == 0" text="center">No comments.</p>
 	</div>
 	<OnScreen
 		v-if="!comments || comments.continuation"
