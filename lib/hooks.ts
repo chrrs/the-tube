@@ -33,6 +33,15 @@ export function useComments(id: string, replyToken?: string) {
 
 	const done = comments && continuation === undefined;
 
+	useEffect(
+		() => () => {
+			setFetching(false);
+			setComments(undefined);
+			setContinuation(undefined);
+		},
+		[id, replyToken]
+	);
+
 	return {
 		comments: comments ?? [],
 		async loadMore() {
