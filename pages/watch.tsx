@@ -56,11 +56,8 @@ const Watch: NextPage<{ video: VideoInfo }> = ({ video }) => {
 
 		const base = location.origin;
 		description = description
-			.replaceAll(
-				/(?:http(?:s)?:\/\/)?(?:www.)?youtube.com(\/[a-zA-Z0-9?=&]*)/gim,
-				`${base}$1`
-			)
-			.replaceAll(
+			.replace(/(?:http(?:s)?:\/\/)?(?:www.)?youtube.com(\/[a-zA-Z0-9?=&]*)/gim, `${base}$1`)
+			.replace(
 				/(?:http(?:s)?:\/\/)?(?:www.)?youtu.be\/([a-zA-Z0-9?=&]*)/gim,
 				`${base}/watch?v=$1`
 			);
