@@ -10,6 +10,7 @@ import DOMPurify from 'dompurify';
 import linkifyHtml from 'linkify-html';
 import 'linkify-plugin-hashtag';
 import { useRouter } from 'next/router';
+import Player from '~/components/Player';
 
 const Container = tw.div`container mx-auto px-4 py-4 flex gap-4`;
 const ContentWrapper = tw.div`flex-1`;
@@ -38,6 +39,7 @@ const Watch: NextPage<{ video: VideoInfo }> = ({ video }) => {
 	const author = meta.author;
 
 	const router = useRouter();
+	const [ready, setReady] = useState(false);
 
 	const [description, setDescription] = useState('');
 	useEffect(() => {
@@ -79,8 +81,11 @@ const Watch: NextPage<{ video: VideoInfo }> = ({ video }) => {
 	return (
 		<Container>
 			<ContentWrapper>
-				<VideoPlaceholder />
-				<Title>{meta.title}</Title>
+				{!ready && <VideoPlaceholder />}
+				<div css={ready ? '' : tw`hidden`}>
+					<Player video={video} onReady={() => setReady(true)} />
+				</div>
+				<Title tw="mt-4">{meta.title}</Title>
 				<Subtitle>
 					{formatNumber(meta.views)} views - {format(new Date(meta.publishDate), 'PPP')}
 				</Subtitle>

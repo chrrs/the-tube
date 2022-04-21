@@ -79,7 +79,7 @@ export async function getVideoInfo(id: string): Promise<VideoInfo> {
 			live: res.livestream,
 			views: res.views,
 			lengthSeconds: res.duration,
-			thumbnail: new URL(`/vi_webp/${id}/maxresdefault.webp`, res.proxyUrl).href,
+			thumbnail: res.thumbnailUrl,
 			author: {
 				id: res.uploaderUrl.split('/').pop()!,
 				name: res.uploader,
