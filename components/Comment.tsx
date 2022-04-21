@@ -50,7 +50,7 @@ const Comment: React.FC<{ video: VideoInfo; comment: ApiComment }> = ({ video, c
 
 	return (
 		<Wrapper>
-			<ProfilePicture src={author.avatar} />
+			<ProfilePicture loading="lazy" src={author.avatar} alt={author.name} />
 			<ContentWrapper>
 				{comment.pinned && (
 					<Supertitle>
