@@ -11,6 +11,7 @@ import linkifyHtml from 'linkify-html';
 import 'linkify-plugin-hashtag';
 import { useRouter } from 'next/router';
 import Player from '~/components/Player';
+import CommentSection from '~/components/CommentSection';
 
 const Container = tw.div`container mx-auto px-4 py-4 flex gap-4`;
 const ContentWrapper = tw.div`flex-1`;
@@ -108,6 +109,8 @@ const Watch: NextPage<{ video: VideoInfo }> = ({ video }) => {
 						/>
 					</div>
 				</InfoBox>
+				<Separator />
+				<CommentSection video={video} />
 			</ContentWrapper>
 			<RelatedVideos>
 				{video.related.map((related) => (

@@ -45,3 +45,13 @@ export function formatDuration(seconds: number): string {
 		return `${minutes}:${pad(seconds, 2)}`;
 	}
 }
+
+export function removeNumberSuffix(str: string): number {
+	let n = parseFloat(str);
+	if (str.endsWith('K')) {
+		n *= 1000;
+	} else if (str.endsWith('M')) {
+		n *= 1000000;
+	}
+	return n;
+}

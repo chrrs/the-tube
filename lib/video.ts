@@ -1,5 +1,6 @@
 import { Stream } from '~/types/piped-api';
-import { formatNumber } from '~/lib/util';
+import ytcm, { CommentsResponse } from '@freetube/yt-comment-scraper';
+import { bestImage, removeNumberSuffix } from '~/lib/util';
 
 export interface VideoInfo {
 	metadata: VideoMetadata;
@@ -55,6 +56,28 @@ export interface Comment {
 export interface Chapter {
 	title: string;
 	time: number;
+}
+
+export interface Comments {
+	comments: Comment[];
+	continuation?: string;
+}
+
+export interface Comment {
+	id: string;
+	text: string;
+	time: string;
+	edited: boolean;
+	author: ChannelInfo;
+
+	likes: number;
+	pinned: boolean;
+	hearted: boolean;
+	owner: boolean;
+
+	replies: number;
+	ownerReplied: boolean;
+	replyToken?: string;
 }
 
 export async function getVideoInfo(id: string): Promise<VideoInfo> {
@@ -115,4 +138,37 @@ export async function getVideoInfo(id: string): Promise<VideoInfo> {
 			time: chapter.start,
 		})),
 	};
+}
+
+function parseComments(res: CommentsResponse): Comments {
+	return {
+		comments: res.comments.map((comment) => ({
+			id: comment.commentId,
+			text: comment.text.replaceAll('<br>', '\n'),
+			time: comment.time,
+			edited: comment.edited,
+			author: {
+				id: comment.authorId,
+				name: comment.author,
+				avatar: bestImage(comment.authorThumb).url,
+				verified: comment.isVerified || comment.isOfficialArtist,
+			},
+			likes: removeNumberSuffix(comment.likes),
+			pinned: comment.isPinned,
+			hearted: comment.isHearted,
+			owner: comment.isOwner,
+			replies: parseInt(comment.numReplies),
+			ownerReplied: comment.hasOwnerReplied,
+			replyToken: comment.replyToken || undefined,
+		})),
+		continuation: res.continuation || undefined,
+	} as Comments;
+}
+
+export async function getReplies(id: string, token: string): Promise<Comments> {
+	return parseComments(await ytcm.getCommentReplies({ videoId: id, replyToken: token }));
+}
+
+export async function getComments(id: string, continuation?: string): Promise<Comments> {
+	return parseComments(await ytcm.getComments({ videoId: id, continuation }));
 }
