@@ -144,7 +144,7 @@ function parseComments(res: CommentsResponse): Comments {
 	return {
 		comments: res.comments.map((comment) => ({
 			id: comment.commentId,
-			text: comment.text.replace('<br>', '\n'),
+			text: comment.text.replace(/<br>/g, '\n'),
 			time: comment.time,
 			edited: comment.edited,
 			author: {

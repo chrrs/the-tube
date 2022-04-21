@@ -17,6 +17,7 @@ const ContentWrapper = tw.div`flex-1`;
 const Supertitle = tw.p`text-sm text-gray-700`;
 const Pin = styled(PinIcon, tw`inline-block align-middle mr-1 mb-1`);
 const Title = tw.h1`font-semibold mb-0.5`;
+const Content = tw.p`whitespace-pre-line`;
 const Timestamp = tw.span`font-normal text-sm text-gray-700 ml-2`;
 const LikeBar = tw.div`mt-2 text-sm text-gray-700`;
 const Like = styled(LikeIcon, tw`inline-block align-middle mr-2 mb-0.5`);
@@ -63,7 +64,7 @@ const Comment: React.FC<{ video: VideoInfo; comment: ApiComment }> = ({ video, c
 						{comment.time} {comment.edited ? '(edited)' : ''}
 					</Timestamp>
 				</Title>
-				<p>{comment.text}</p>
+				<Content>{comment.text.replace(/<br>/g, '\n')}</Content>
 				<LikeBar>
 					<Like />
 					{formatNumber(comment.likes, true)}
