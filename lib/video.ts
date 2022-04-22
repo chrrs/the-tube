@@ -162,7 +162,7 @@ function parseComments(res: CommentsResponse): Comments {
 			replyToken: comment.replyToken || undefined,
 		})),
 		continuation: res.continuation || undefined,
-	} as Comments;
+	};
 }
 
 export async function getReplies(id: string, token: string): Promise<Comments> {

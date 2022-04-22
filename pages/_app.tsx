@@ -4,9 +4,7 @@ import tw, { globalStyles, styled } from 'twin.macro';
 import Header from '~/components/Header';
 import NextNProgress from 'nextjs-progressbar';
 
-const AppWrapper = styled.div({
-	...tw`bg-gray-50 min-h-screen`,
-});
+const AppWrapper = tw.div`bg-gray-50 min-h-screen`;
 
 function MyApp({ Component, pageProps }: AppProps) {
 	globalCss(globalStyles as Record<any, any>)();
