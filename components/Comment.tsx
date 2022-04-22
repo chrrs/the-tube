@@ -64,7 +64,7 @@ const Comment: React.FC<{ video: VideoInfo; comment: ApiComment }> = ({ video, c
 						{comment.time} {comment.edited ? '(edited)' : ''}
 					</Timestamp>
 				</Title>
-				<Content>{comment.text.replace(/<br>/g, '\n')}</Content>
+				<Content>{comment.text}</Content>
 				<LikeBar>
 					<Like />
 					{formatNumber(comment.likes, true)}
