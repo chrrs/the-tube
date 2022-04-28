@@ -12,6 +12,7 @@ import { formatNumber } from '~/lib/util';
 import { useState } from 'react';
 import { useComments } from '~/lib/hooks';
 import Spinner from '~/components/Spinner';
+import HtmlContent from './TextContent';
 
 const Wrapper = tw.div`flex gap-4`;
 const ProfilePicture = tw.img`rounded-full w-10 h-10`;
@@ -19,7 +20,6 @@ const ContentWrapper = tw.div`flex-1`;
 const Supertitle = tw.p`text-sm text-gray-700`;
 const PinIcon = styled(RiPushpinLine, tw`inline-block align-middle mr-1 mb-1`);
 const Title = tw.h1`font-semibold mb-0.5`;
-const Content = tw.p`whitespace-pre-line`;
 const Timestamp = tw.span`font-normal text-sm text-gray-700 ml-2`;
 const LikeBar = tw.div`mt-2 text-sm text-gray-700`;
 const LikeIcon = styled(RiThumbUpLine, tw`inline-block align-middle mr-2 mb-0.5`);
@@ -66,7 +66,7 @@ const Comment: React.FC<{ video: VideoInfo; comment: ApiComment }> = ({ video, c
 						{comment.time} {comment.edited ? '(edited)' : ''}
 					</Timestamp>
 				</Title>
-				<Content>{comment.text}</Content>
+				<HtmlContent html={comment.text} />
 				<LikeBar>
 					<LikeIcon />
 					{formatNumber(comment.likes, true)}
