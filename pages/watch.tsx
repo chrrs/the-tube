@@ -54,7 +54,7 @@ const Watch: NextPage<{ video: VideoInfo }> = ({ video }) => {
 								{formatNumber(author.subscribers ?? 0, true)} subscribers
 							</AuthorSubtitle>
 						</AuthorInfo>
-						<HtmlContent html={meta.description ?? ''} />
+						<HtmlContent videoId={meta.id} html={meta.description ?? ''} />
 					</div>
 				</InfoBox>
 				<Separator />

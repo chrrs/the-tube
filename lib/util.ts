@@ -55,3 +55,7 @@ export function removeNumberSuffix(str: string): number {
 	}
 	return n;
 }
+
+export function parseDuration(duration: string): number {
+	return duration.split(':').reduce((prev, curr) => prev * 60 + parseInt(curr), 0);
+}

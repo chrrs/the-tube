@@ -2,18 +2,18 @@ import tw, { styled } from 'twin.macro';
 import DOMPurify from 'dompurify';
 import linkifyHtml from 'linkify-html';
 import 'linkify-plugin-hashtag';
+import '~/lib/linkify-timestamp';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { parseDuration } from '~/lib/util';
 
 const Content = styled.p({
-	...tw`whitespace-pre-line`,
-
 	'a[href]': {
 		...tw`text-blue-500 hover:underline`,
 	},
 });
 
-const HtmlContent: React.FC<{ html: string }> = ({ html }) => {
+const HtmlContent: React.FC<{ html: string; videoId?: string }> = ({ html, videoId }) => {
 	const router = useRouter();
 	const [sanitized, setSanitized] = useState('');
 
@@ -21,9 +21,13 @@ const HtmlContent: React.FC<{ html: string }> = ({ html }) => {
 		let content = html;
 		content = DOMPurify.sanitize(content, { ALLOWED_TAGS: ['br', 'a'] });
 		content = linkifyHtml(content, {
+			nl2br: true,
+
 			formatHref: {
 				hashtag: (href: string) =>
 					'/results?search_query=' + encodeURIComponent(href.substring(1)),
+				timestamp: (timestamp: string) =>
+					`/watch?v=${videoId}&t=${parseDuration(timestamp)}`,
 			},
 		});
 
@@ -36,7 +40,7 @@ const HtmlContent: React.FC<{ html: string }> = ({ html }) => {
 			);
 
 		setSanitized(content);
-	}, [html]);
+	}, [html, videoId]);
 
 	function onClick(event: Event) {
 		// @ts-ignore
