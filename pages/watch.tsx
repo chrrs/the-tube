@@ -1,12 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next';
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
 import ChannelName from '~/components/ChannelName';
 import RelatedVideo from '~/components/RelatedVideo';
 import { formatNumber, removeUndefined } from '~/lib/util';
 import { getVideoInfo, VideoInfo } from '~/lib/video';
 import { format } from 'date-fns';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Player from '~/components/Player';
 import CommentSection from '~/components/CommentSection';
 import HtmlContent from '~/components/TextContent';
