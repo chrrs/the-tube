@@ -12,6 +12,8 @@
 	"dependencies": {
 		"@freetube/yt-comment-scraper": "^6.1.0",
 		"@stitches/react": "^1.2.7",
+		"@vime/core": "^5.3.1",
+		"@vime/react": "^5.3.1",
 		"date-fns": "^2.28.0",
 		"dompurify": "^2.3.6",
 		"linkify-html": "^3.0.5",
@@ -21,8 +23,7 @@
 		"nextjs-progressbar": "^0.0.14",
 		"react": "18.0.0",
 		"react-dom": "18.0.0",
-		"react-icons": "^4.3.1",
-		"video.js": "^7.18.1"
+		"react-icons": "^4.3.1"
 	},
 	"devDependencies": {
 		"@svgr/core": "^6.2.1",

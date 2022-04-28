@@ -1,54 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
-import videojs, { VideoJsPlayer } from 'video.js';
-
-import 'video.js/dist/video-js.css';
+import { useEffect, useState } from 'react';
 import { VideoInfo } from '~/lib/video';
+import { DefaultUi, Player as VimePlayer, Hls, LiveIndicator } from '@vime/react';
+
+import '@vime/core/themes/default.css';
 
 const Player: React.FC<{
 	time: number;
 	video: VideoInfo;
 	onReady?: () => void;
 }> = ({ time, video, onReady }) => {
-	const el = useRef<HTMLVideoElement>(null);
-	const [player, setPlayer] = useState<VideoJsPlayer | null>(null);
-
-	useEffect(() => {
-		if (!el.current || player) {
-			return;
-		}
-
-		let p: VideoJsPlayer = videojs(
-			el.current,
-			{
-				controls: true,
-				autoplay: true,
-				responsive: true,
-				fluid: true,
-			},
-			() => {
-				p.volume(parseFloat(localStorage.getItem('_player_volume') || '1'));
-				p.currentTime(time);
-				onReady?.();
-			}
-		);
-		setPlayer(p);
-
-		p.on('volumechange', () => {
-			localStorage.setItem('_player_volume', p.volume().toString());
-		});
-	}, [video, player, onReady, time]);
+	const [source, setSource] = useState<{ src: string; type: string }>();
 
 	useEffect(() => {
 		(async () => {
-			if (!player) {
-				return;
-			}
-
-			player.poster(video.metadata.thumbnail);
-
-			const src = [];
 			if (video.metadata.live && video.hls) {
-				src.push({
+				setSource({
 					src: video.hls,
 					type: 'application/x-mpegURL',
 				});
@@ -56,38 +22,36 @@ const Player: React.FC<{
 				const type = await fetch(video.lbry).then((res) => res.headers.get('content-type'));
 
 				if (type) {
-					src.push({
+					setSource({
 						src: video.lbry,
 						type,
 					});
 				}
 			} else if (video.dash) {
-				src.push({
+				setSource({
 					src: video.dash,
 					type: 'application/dash+xml',
 				});
 			} else if (video.hls) {
-				src.push({
+				setSource({
 					src: video.hls,
 					type: 'application/x-mpegURL',
 				});
 			}
-
-			player.src(src);
-			player.currentTime(time);
 		})();
-	}, [player, video, time]);
+	}, [video]);
 
-	// TODO: Test if this is correct.
-	if (process.env.NODE_ENV !== 'development') {
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		useEffect(() => () => player?.dispose(), [player]);
-	}
+	useEffect(() => {
+		onReady?.();
+	}, [onReady]);
 
 	return (
-		<div data-vjs-player>
-			<video ref={el} className="video-js" playsInline />
-		</div>
+		<VimePlayer playsinline autoplay currentTime={time}>
+			<Hls config={{ liveDurationInfinity: true }} poster={video.metadata.thumbnail}>
+				<source data-src={source?.src} type={source?.type} />
+			</Hls>
+			<DefaultUi></DefaultUi>
+		</VimePlayer>
 	);
 };
 

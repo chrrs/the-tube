@@ -6,10 +6,12 @@ import { formatNumber, removeUndefined } from '~/lib/util';
 import { getVideoInfo, VideoInfo } from '~/lib/video';
 import { format } from 'date-fns';
 import { useState } from 'react';
-import Player from '~/components/Player';
 import CommentSection from '~/components/CommentSection';
 import HtmlContent from '~/components/TextContent';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
+
+const Player = dynamic(() => import('~/components/Player'), { ssr: false });
 
 const Container = tw.div`container mx-auto px-4 py-4 flex gap-4`;
 const ContentWrapper = tw.div`flex-1`;
