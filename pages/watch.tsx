@@ -24,7 +24,7 @@ const AuthorSubtitle = tw.h2`text-sm text-gray-700`;
 
 const RelatedVideos = tw.div`w-[26rem] flex flex-col gap-4`;
 
-const Watch: NextPage<{ video: VideoInfo }> = ({ video }) => {
+const Watch: NextPage<{ video: VideoInfo; time: number }> = ({ video, time }) => {
 	const meta = video.metadata;
 	const author = meta.author;
 
@@ -35,7 +35,7 @@ const Watch: NextPage<{ video: VideoInfo }> = ({ video }) => {
 			<ContentWrapper>
 				{!ready && <VideoPlaceholder />}
 				<div css={ready ? '' : tw`hidden`}>
-					<Player video={video} onReady={() => setReady(true)} />
+					<Player time={time} video={video} onReady={() => setReady(true)} />
 				</div>
 				<Title tw="mt-4">{meta.title}</Title>
 				<Subtitle>
@@ -80,6 +80,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	return {
 		props: removeUndefined({
 			video: await getVideoInfo(context.query.v as string),
+			time: Number(context.query.t ?? 0),
 		}),
 	};
 };

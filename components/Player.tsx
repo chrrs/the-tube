@@ -5,9 +5,10 @@ import 'video.js/dist/video-js.css';
 import { VideoInfo } from '~/lib/video';
 
 const Player: React.FC<{
+	time: number;
 	video: VideoInfo;
 	onReady?: () => void;
-}> = ({ video, onReady }) => {
+}> = ({ time, video, onReady }) => {
 	const el = useRef<HTMLVideoElement>(null);
 	const [player, setPlayer] = useState<VideoJsPlayer | null>(null);
 
@@ -26,6 +27,7 @@ const Player: React.FC<{
 			},
 			() => {
 				p.volume(parseFloat(localStorage.getItem('_player_volume') || '1'));
+				p.currentTime(time);
 				onReady?.();
 			}
 		);
@@ -34,7 +36,7 @@ const Player: React.FC<{
 		p.on('volumechange', () => {
 			localStorage.setItem('_player_volume', p.volume().toString());
 		});
-	}, [video, player, onReady]);
+	}, [video, player, onReady, time]);
 
 	useEffect(() => {
 		(async () => {
@@ -72,8 +74,9 @@ const Player: React.FC<{
 			}
 
 			player.src(src);
+			player.currentTime(time);
 		})();
-	}, [player, video]);
+	}, [player, video, time]);
 
 	// TODO: Test if this is correct.
 	if (process.env.NODE_ENV !== 'development') {
