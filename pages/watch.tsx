@@ -9,6 +9,7 @@ import { useState } from 'react';
 import Player from '~/components/Player';
 import CommentSection from '~/components/CommentSection';
 import HtmlContent from '~/components/TextContent';
+import Head from 'next/head';
 
 const Container = tw.div`container mx-auto px-4 py-4 flex gap-4`;
 const ContentWrapper = tw.div`flex-1`;
@@ -32,6 +33,10 @@ const Watch: NextPage<{ video: VideoInfo; time: number }> = ({ video, time }) =>
 
 	return (
 		<Container>
+			<Head>
+				<title>{meta.title}</title>
+			</Head>
+
 			<ContentWrapper>
 				{!ready && <VideoPlaceholder />}
 				<div css={ready ? '' : tw`hidden`}>
