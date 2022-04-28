@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
-import VerifiedIcon from '~icons/ri/check-line.jsx';
+import { RiCheckLine } from 'react-icons/ri';
 
-const VerifiedBadge = styled(VerifiedIcon, tw`inline-block align-middle ml-1 mb-0.5`);
+const VerifiedBadge = styled(RiCheckLine, tw`inline-block align-middle ml-1 mb-0.5`);
 
 const ChannelName: React.FC<{
 	verified?: boolean;

@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 
-import SearchIcon from '~icons/ri/search-line.jsx';
+import { RiSearchLine } from 'react-icons/ri';
 
 const Wrapper = tw.div`flex w-[48rem]`;
 const Input = tw.input`flex-1 border border-gray-300 focus-within:border-blue-300 px-2 py-1`;
@@ -11,7 +11,7 @@ const SearchBar: React.FC = () => {
 		<Wrapper>
 			<Input />
 			<Button>
-				<SearchIcon />
+				<RiSearchLine />
 			</Button>
 		</Wrapper>
 	);
