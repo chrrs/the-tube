@@ -32,6 +32,7 @@ export interface ChannelInfo {
 }
 
 export interface Comments {
+	total?: number;
 	comments: Comment[];
 	continuation?: string;
 }
@@ -142,6 +143,7 @@ export async function getVideoInfo(id: string): Promise<VideoInfo> {
 
 function parseComments(res: CommentsResponse): Comments {
 	return {
+		total: res.total || undefined,
 		comments: res.comments.map((comment) => ({
 			id: comment.commentId,
 			text: comment.text.replace(/<br>/g, '\n'),

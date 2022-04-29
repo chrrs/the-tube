@@ -15,6 +15,7 @@ declare module '@freetube/yt-comment-scraper' {
 	}
 
 	export interface CommentsResponse {
+		total?: number;
 		comments: Comment[];
 		continuation?: string;
 	}

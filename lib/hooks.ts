@@ -27,6 +27,7 @@ export function useOnScreen(ref: RefObject<HTMLElement>) {
 }
 
 export function useComments(id: string, replyToken?: string) {
+	const [total, setTotal] = useState<number>();
 	const [fetching, setFetching] = useState(false);
 	const [comments, setComments] = useState<Comment[]>();
 	const [continuation, setContinuation] = useState<string>();
@@ -35,6 +36,7 @@ export function useComments(id: string, replyToken?: string) {
 
 	useEffect(
 		() => () => {
+			setTotal(undefined);
 			setFetching(false);
 			setComments(undefined);
 			setContinuation(undefined);
@@ -43,6 +45,7 @@ export function useComments(id: string, replyToken?: string) {
 	);
 
 	return {
+		total,
 		comments: comments ?? [],
 		async loadMore() {
 			if (fetching || done) {
@@ -64,6 +67,7 @@ export function useComments(id: string, replyToken?: string) {
 
 			const comments: Comments = await res.json();
 
+			setTotal(comments.total);
 			setComments((c) => [...(c ?? []), ...comments.comments]);
 			setContinuation(comments.continuation);
 

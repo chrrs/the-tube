@@ -10,7 +10,7 @@
 		"format": "prettier --ignore-path .gitignore --write ."
 	},
 	"dependencies": {
-		"@freetube/yt-comment-scraper": "^6.1.0",
+		"@freetube/yt-comment-scraper": "https://github.com/chrrs/yt-comment-scraper#total_comments",
 		"@stitches/react": "^1.2.7",
 		"@vime/core": "^5.3.1",
 		"@vime/react": "^5.3.1",
