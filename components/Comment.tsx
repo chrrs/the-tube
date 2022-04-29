@@ -30,6 +30,14 @@ const RepliesWrapper = tw.div`flex flex-col items-start gap-4 mt-4`;
 const ArrowRight = styled(RiArrowRightLine, tw`inline-block align-middle mr-1 mb-0.5`);
 const Loader = tw.div`w-full flex justify-center`;
 
+const AuthorName = styled.span({
+	variants: {
+		owner: {
+			true: tw`rounded-full px-2 pb-0.5 bg-gray-500 text-white`,
+		},
+	},
+});
+
 const Comment: React.FC<{ video: VideoInfo; comment: ApiComment }> = ({ video, comment }) => {
 	const author = comment.author;
 
@@ -61,7 +69,9 @@ const Comment: React.FC<{ video: VideoInfo; comment: ApiComment }> = ({ video, c
 					</Supertitle>
 				)}
 				<Title>
-					<ChannelName verified={author.verified}>{author.name}</ChannelName>
+					<AuthorName owner={comment.owner}>
+						<ChannelName verified={author.verified}>{author.name}</ChannelName>
+					</AuthorName>
 					<Timestamp>
 						{comment.time} {comment.edited ? '(edited)' : ''}
 					</Timestamp>
