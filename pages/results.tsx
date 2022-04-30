@@ -2,13 +2,15 @@ import { GetServerSideProps, NextPage } from 'next';
 import tw from 'twin.macro';
 import SearchResult from '~/components/search/SearchResult';
 import { getSearchResults, SearchResults } from '~/lib/search';
-import { removeUndefined } from '~/lib/util';
+import { formatNumber, removeUndefined } from '~/lib/util';
 
+const Header = tw.p`py-2 border-b border-gray-200 text-gray-700 font-semibold`;
 const Container = tw.div`container max-w-5xl mx-auto px-4 py-4 flex flex-col gap-4`;
 
 const Results: NextPage<{ results: SearchResults }> = ({ results }) => {
 	return (
 		<Container>
+			{results.results && <Header>{formatNumber(results.results)} results</Header>}
 			{results.items.map((result, i) => (
 				<SearchResult key={i} result={result} />
 			))}
