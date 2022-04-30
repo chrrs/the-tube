@@ -214,12 +214,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@freetube/yt-comment-scraper@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@freetube/yt-comment-scraper/-/yt-comment-scraper-6.1.0.tgz#13583dedf5cf0cff6d42d155ef5f2474c64fd4ee"
-  integrity sha512-Cj6Of7DPkTH1ax1AcaOn0xul179YsnfaNNoH11lQ4xUxUrmtf70Qj04+FDI+7/O/qsOR3RMq1mreCvM6BQI6Aw==
-  dependencies:
-    axios "^0.21.1"
+"@fabricio-191/youtube@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@fabricio-191/youtube/-/youtube-0.0.3.tgz#ea970f3b8897bfc9e394a48e46c390325c04aac8"
+  integrity sha512-BmYX7P9qzTQSTH11irWZPGI6iItfoX7+nlAsECKujODncVJlkDJh2K0gZKS+1W84a050lEJsb3GzcenkEx26hA==
 
 "@freetube/yt-comment-scraper@https://github.com/chrrs/yt-comment-scraper#total_comments":
   version "6.1.0"
@@ -1967,6 +1965,11 @@ micromatch@^4.0.4:
     braces "^3.0.2"
     picomatch "^2.3.1"
 
+miniget@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/miniget/-/miniget-4.2.2.tgz#db20320f265efdc4c1826a0be431d56753074475"
+  integrity sha512-a7voNL1N5lDMxvTMExOkg+Fq89jM2vY8pAi9ZEWzZtfNmdfP6RXkvUtFnCAXoCv2T9k1v/fUJVaAEuepGcvLYA==
+
 minimatch@^3.0.4, minimatch@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
@@ -2838,3 +2841,10 @@ yaml@^1.10.0, yaml@^1.10.2, yaml@^1.7.2:
   version "1.10.2"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
+
+ytsr@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/ytsr/-/ytsr-3.8.0.tgz#49a8e5dc413f41515fc3d79d93ee3e073d10e772"
+  integrity sha512-R+RfYXvBBMAr2e4OxrQ5SBv5x/Mdhmcj1Q8TH0f2HK5d2jbhHOtK4BdzPvLriA6MDoMwqqX04GD8Rpf9UNtSTg==
+  dependencies:
+    miniget "^4.2.2"

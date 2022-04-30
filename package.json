@@ -10,6 +10,7 @@
 		"format": "prettier --ignore-path .gitignore --write ."
 	},
 	"dependencies": {
+		"@fabricio-191/youtube": "^0.0.3",
 		"@freetube/yt-comment-scraper": "https://github.com/chrrs/yt-comment-scraper#total_comments",
 		"@stitches/react": "^1.2.7",
 		"@vime/core": "^5.3.1",
@@ -23,7 +24,8 @@
 		"nextjs-progressbar": "^0.0.14",
 		"react": "18.0.0",
 		"react-dom": "18.0.0",
-		"react-icons": "^4.3.1"
+		"react-icons": "^4.3.1",
+		"ytsr": "^3.8.0"
 	},
 	"devDependencies": {
 		"@svgr/core": "^6.2.1",
