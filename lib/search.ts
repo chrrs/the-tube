@@ -20,6 +20,7 @@ export interface ChannelResult extends ChannelInfo {
 
 export interface ShelfResult {
 	type: 'shelf';
+	title: string;
 	items: SearchResult[];
 }
 
@@ -55,6 +56,7 @@ function ytsrToSearchResult(item: ytsr.Item): SearchResult | undefined {
 	} else if (item.type === 'shelf') {
 		return {
 			type: 'shelf',
+			title: item.title,
 			items: item.items
 				.map((shelfItem) => ytsrToSearchResult(shelfItem))
 				.filter((item) => item !== undefined) as SearchResult[],

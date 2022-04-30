@@ -19,7 +19,7 @@ const VideoSearchResult: React.FC<{ result: VideoResult }> = ({ result }) => {
 		<Link href={`/watch?v=${result.id}`} passHref>
 			<Wrapper>
 				<ThumbnailWrapper>
-					<Thumbnail src={result.thumbnail} alt={result.title} />
+					<Thumbnail loading="lazy" src={result.thumbnail} alt={result.title} />
 					<Duration>{formatDuration(result.lengthSeconds)}</Duration>
 				</ThumbnailWrapper>
 				<div>
