@@ -14,7 +14,12 @@ export interface VideoResult extends VideoMetadata {
 	type: 'video';
 }
 
-export interface ChannelResult extends ChannelInfo {
+export interface ExtendedChannelInfo extends ChannelInfo {
+	videos?: number;
+	description?: string;
+}
+
+export interface ChannelResult extends ExtendedChannelInfo {
 	type: 'channel';
 }
 
@@ -49,9 +54,13 @@ function ytsrToSearchResult(item: ytsr.Item): SearchResult | undefined {
 			id: item.channelID,
 			name: item.name,
 			description: item.descriptionShort || undefined,
-			subscribers: (item.subscribers && removeNumberSuffix(item.subscribers)) || undefined,
+			subscribers:
+				(item.subscribers &&
+					removeNumberSuffix(item.subscribers.replace(' subscribers', ''))) ||
+				undefined,
 			avatar: item.bestAvatar.url || undefined,
 			verified: item.verified,
+			videos: item.videos || undefined,
 		};
 	} else if (item.type === 'shelf') {
 		return {

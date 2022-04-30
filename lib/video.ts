@@ -26,7 +26,6 @@ export interface VideoMetadata {
 export interface ChannelInfo {
 	id: string;
 	name: string;
-	description?: string;
 	subscribers?: number;
 	avatar?: string;
 	verified: boolean;
