@@ -66,7 +66,11 @@ const Player: React.FC<{
 				/>
 			)}
 			{source?.type === 'hls' && (
-				<Hls mediaTitle={video.metadata.title} poster={video.metadata.thumbnail}>
+				<Hls
+					config={{ liveDurationInfinity: true }}
+					mediaTitle={video.metadata.title}
+					poster={video.metadata.thumbnail}
+				>
 					<source data-src={source?.src} type={source?.mimeType} />
 				</Hls>
 			)}

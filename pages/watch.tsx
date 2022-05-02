@@ -17,6 +17,7 @@ const Container = tw.div`container mx-auto px-4 py-4 flex gap-4`;
 const ContentWrapper = tw.div`flex-1`;
 const VideoPlaceholder = tw.div`w-full pb-[56.25%] mb-4 bg-black`;
 const Title = tw.h1`font-medium text-lg`;
+const LiveBadge = tw.span`uppercase font-medium text-white bg-red-500 px-2 pt-[0.0625rem] mr-2`;
 const Subtitle = tw.h2`text-gray-700 mt-1`;
 const Separator = tw.hr`border-gray-200 my-4`;
 const InfoBox = tw.div`flex gap-4`;
@@ -46,7 +47,10 @@ const Watch: NextPage<{ video: VideoInfo; time: number }> = ({ video, time }) =>
 				</div>
 				<Title tw="mt-4">{meta.title}</Title>
 				<Subtitle>
-					{formatNumber(meta.views)} views - {format(new Date(meta.publishDate), 'PPP')}
+					{meta.live && <LiveBadge>Live</LiveBadge>}
+					{formatNumber(meta.views)}
+					{meta.live ? ' viewers - Live since ' : ' views - '}
+					{format(new Date(meta.publishDate), 'PPP')}
 				</Subtitle>
 				<Separator />
 				<InfoBox>
