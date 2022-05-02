@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, RefObject } from 'react';
+import { useEffect, useState, useRef, RefObject, EffectCallback, DependencyList } from 'react';
 import { Comments, Comment, getComments, getReplies } from '~/lib/video';
 
 export function useOnScreen(ref: RefObject<HTMLElement>) {
@@ -76,4 +76,13 @@ export function useComments(id: string, replyToken?: string) {
 		fetching,
 		done,
 	};
+}
+
+export function useDebouncedEffect(effect: Function, dependencies: DependencyList, delay = 200) {
+	useEffect(() => {
+		const timeout = setTimeout(() => effect(), delay);
+		return () => clearTimeout(timeout);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, dependencies);
 }
