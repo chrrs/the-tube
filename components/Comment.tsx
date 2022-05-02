@@ -15,7 +15,7 @@ import Spinner from '~/components/Spinner';
 import HtmlContent from './TextContent';
 
 const Wrapper = tw.div`flex gap-4`;
-const ProfilePicture = tw.img`rounded-full w-10 h-10`;
+const ProfilePicture = tw.img`rounded-full overflow-hidden w-10 h-10`;
 const ContentWrapper = tw.div`flex-1`;
 const Supertitle = tw.p`text-sm text-gray-700`;
 const PinIcon = styled(RiPushpinLine, tw`inline-block align-middle mr-1 mb-1`);
