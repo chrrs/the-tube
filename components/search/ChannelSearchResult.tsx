@@ -7,7 +7,7 @@ const Wrapper = tw.div`flex gap-4`;
 const AvatarWrapper = styled.div({ ...tw`flex justify-center`, flex: '0 0 360px' });
 const Info = tw.div`flex flex-col justify-center`;
 const Avatar = tw.img`w-32 h-32 rounded-full`;
-const Name = tw.h1`text-lg font-semibold`;
+const Name = tw.h1`text-lg font-medium`;
 const Subtitle = tw.p`text-gray-700`;
 const Description = tw.p`text-gray-700 mt-2 line-clamp-1`;
 

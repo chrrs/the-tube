@@ -5,7 +5,7 @@ import SearchResult from '~/components/search/SearchResult';
 import { getSearchResults, SearchResults } from '~/lib/search';
 import { formatNumber, removeUndefined } from '~/lib/util';
 
-const Header = tw.p`py-2 border-b border-gray-200 text-gray-700 font-semibold`;
+const Header = tw.p`py-2 border-b border-gray-200 text-gray-700 font-medium`;
 const Container = tw.div`container max-w-5xl mx-auto px-4 py-4 flex flex-col gap-4`;
 
 const Results: NextPage<{ results: SearchResults; query: string }> = ({ results, query }) => {

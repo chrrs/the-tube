@@ -219,6 +219,11 @@
   resolved "https://registry.yarnpkg.com/@fabricio-191/youtube/-/youtube-0.0.3.tgz#ea970f3b8897bfc9e394a48e46c390325c04aac8"
   integrity sha512-BmYX7P9qzTQSTH11irWZPGI6iItfoX7+nlAsECKujODncVJlkDJh2K0gZKS+1W84a050lEJsb3GzcenkEx26hA==
 
+"@fontsource/roboto@^4.5.5":
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-4.5.5.tgz#4ecc38e690469378e2ec2a97f9c12282c654cc93"
+  integrity sha512-Pe1p+gAO6K0aLxBXlLoJRHVx352tVc/v/7DOnvM3t+FYXb+KUga9aCD1NpnDfd0kKnWXqrZyAXguyyFWDDuphw==
+
 "@freetube/yt-comment-scraper@https://github.com/chrrs/yt-comment-scraper#total_comments":
   version "6.1.0"
   resolved "https://github.com/chrrs/yt-comment-scraper#52396f67a98cec4e1b944c851fbe8f0f354c7e5a"

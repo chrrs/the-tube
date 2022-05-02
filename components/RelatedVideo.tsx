@@ -8,8 +8,8 @@ import { formatDistanceToNowStrict } from 'date-fns';
 const Wrapper = tw.a`flex gap-2`;
 const ThumbnailWrapper = styled.div({ ...tw`h-[94px] bg-gray-200 relative`, flex: '0 0 168px' });
 const Thumbnail = tw.img`w-full h-full object-cover`;
-const Duration = tw.span`absolute bottom-2 right-2 font-semibold text-xs text-white bg-black bg-opacity-75 px-1 pb-0.5`;
-const Title = tw.h1`text-sm font-semibold line-clamp-2 mb-1`;
+const Duration = tw.span`absolute bottom-2 right-2 font-medium text-xs text-white bg-black bg-opacity-75 px-1 pb-0.5`;
+const Title = tw.h1`text-sm font-medium line-clamp-2 mb-1`;
 const Subtitle = tw.h2`text-sm text-gray-700`;
 
 const RelatedVideo: React.FC<{ meta: VideoMetadata }> = ({ meta }) => {

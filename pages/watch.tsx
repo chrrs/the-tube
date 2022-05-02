@@ -16,13 +16,13 @@ const Player = dynamic(() => import('~/components/Player'), { ssr: false });
 const Container = tw.div`container mx-auto px-4 py-4 flex gap-4`;
 const ContentWrapper = tw.div`flex-1`;
 const VideoPlaceholder = tw.div`w-full pb-[56.25%] mb-4 bg-black`;
-const Title = tw.h1`font-semibold text-lg`;
+const Title = tw.h1`font-medium text-lg`;
 const Subtitle = tw.h2`text-gray-700 mt-1`;
 const Separator = tw.hr`border-gray-200 my-4`;
 const InfoBox = tw.div`flex gap-4`;
 const ProfilePicture = tw.img`rounded-full w-12 h-12 bg-gray-200`;
 const AuthorInfo = tw.div`flex flex-col justify-center h-12 mb-4`;
-const AuthorName = tw.h1`font-semibold`;
+const AuthorName = tw.h1`font-medium`;
 const AuthorSubtitle = tw.h2`text-sm text-gray-700`;
 
 const RelatedVideos = tw.div`w-[26rem] flex flex-col gap-4`;

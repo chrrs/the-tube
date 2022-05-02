@@ -4,8 +4,8 @@ import { ShelfResult } from '~/lib/search';
 import SearchResult from './SearchResult';
 
 const Wrapper = tw.div`flex flex-col border-t border-b border-gray-200 gap-4 py-4`;
-const Header = tw.h1`font-semibold`;
-const ShowMoreButton = tw.button`font-semibold uppercase text-gray-700 text-center`;
+const Header = tw.h1`font-medium`;
+const ShowMoreButton = tw.button`font-medium uppercase text-gray-700 text-center`;
 
 const ShelfSearchResult: React.FC<{ result: ShelfResult }> = ({ result }) => {
 	const n = result.items.length;
