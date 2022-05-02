@@ -56,8 +56,8 @@ const SearchBar: React.FC = () => {
 				/>
 				{activeSuggestions.length > 0 && (
 					<Combobox.Options css={itemsWrapper}>
-						{activeSuggestions.map((e) => (
-							<Combobox.Option key={e} value={e} as={Fragment}>
+						{activeSuggestions.map((e, i) => (
+							<Combobox.Option key={i} value={e} as={Fragment}>
 								{({ active }) => <SearchItem active={active}>{e}</SearchItem>}
 							</Combobox.Option>
 						))}
@@ -68,7 +68,6 @@ const SearchBar: React.FC = () => {
 				<RiSearchLine />
 			</Button>
 		</Wrapper>
-		// 	<Input onChange={(e) => setQuery(e.target.value)} />
 	);
 };
 
