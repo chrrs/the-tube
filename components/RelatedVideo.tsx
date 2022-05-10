@@ -11,6 +11,7 @@ const Thumbnail = tw.img`w-full h-full object-cover`;
 const Duration = tw.span`absolute bottom-2 right-2 font-medium text-xs text-white bg-black bg-opacity-75 px-1 pb-0.5`;
 const Title = tw.h1`text-sm font-medium line-clamp-2 mb-1`;
 const Subtitle = tw.h2`text-sm text-gray-700`;
+const LiveBadge = tw.span`uppercase font-medium text-white bg-red-500 px-2 pt-[0.0625rem] mr-2`;
 
 const RelatedVideo: React.FC<{ meta: VideoMetadata }> = ({ meta }) => {
 	const author = meta.author;
@@ -30,8 +31,9 @@ const RelatedVideo: React.FC<{ meta: VideoMetadata }> = ({ meta }) => {
 						<ChannelName verified={author.verified}>{author.name}</ChannelName>
 					</Subtitle>
 					<Subtitle>
+						{!meta.publishDate && <LiveBadge>Live</LiveBadge>}
 						{formatNumber(meta.views)}
-						{meta.publishDate ? ' views - ' : ' views'}
+						{meta.publishDate ? ' views - ' : ' viewers'}
 						{meta.publishDate &&
 							formatDistanceToNowStrict(new Date(meta.publishDate), {
 								addSuffix: true,

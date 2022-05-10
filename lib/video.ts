@@ -124,7 +124,7 @@ export async function getVideoInfo(id: string): Promise<VideoInfo> {
 				publishDate: related.uploadedDate && new Date(related.uploaded).toISOString(),
 				live: false,
 				views: related.views,
-				lengthSeconds: related.duration,
+				lengthSeconds: (related.duration != -1 && related.duration) || undefined,
 				thumbnail: related.thumbnail,
 				author: {
 					id: related.uploaderUrl.split('/').pop() as string,
