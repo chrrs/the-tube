@@ -39,7 +39,7 @@ function ytsrToSearchResult(item: ytsr.Item): SearchResult | undefined {
 			publishDate: item.uploadedAt || '1-1-1900',
 			live: item.isLive,
 			views: item.views || 0,
-			lengthSeconds: (item.duration && parseDuration(item.duration)) || 0,
+			lengthSeconds: (item.duration && parseDuration(item.duration)) || undefined,
 			thumbnail: item.bestThumbnail.url || '',
 			author: {
 				id: item.author?.channelID || '',

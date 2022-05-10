@@ -33,7 +33,7 @@ export interface RelatedStream {
 	uploaderAvatar: string;
 	uploadDate: string;
 	shortDescription: string | null;
-	duration: number;
+	duration?: number;
 	views: number;
 	uploaded: number;
 	uploaderVerified: boolean;

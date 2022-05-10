@@ -21,7 +21,9 @@ const VideoSearchResult: React.FC<{ result: VideoResult }> = ({ result }) => {
 			<Wrapper>
 				<ThumbnailWrapper>
 					<Thumbnail loading="lazy" src={result.thumbnail} alt={result.title} />
-					<Duration>{formatDuration(result.lengthSeconds)}</Duration>
+					{result.lengthSeconds && (
+						<Duration>{formatDuration(result.lengthSeconds)}</Duration>
+					)}
 				</ThumbnailWrapper>
 				<div>
 					<Title>{result.title}</Title>

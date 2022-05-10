@@ -20,7 +20,9 @@ const RelatedVideo: React.FC<{ meta: VideoMetadata }> = ({ meta }) => {
 			<Wrapper>
 				<ThumbnailWrapper>
 					<Thumbnail loading="lazy" src={meta.thumbnail} alt={meta.title} />
-					<Duration>{formatDuration(meta.lengthSeconds)}</Duration>
+					{meta.lengthSeconds && (
+						<Duration>{formatDuration(meta.lengthSeconds)}</Duration>
+					)}
 				</ThumbnailWrapper>
 				<div>
 					<Title>{meta.title}</Title>
