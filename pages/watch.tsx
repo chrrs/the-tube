@@ -49,8 +49,9 @@ const Watch: NextPage<{ video: VideoInfo; time: number }> = ({ video, time }) =>
 				<Subtitle>
 					{meta.live && <LiveBadge>Live</LiveBadge>}
 					{formatNumber(meta.views)}
-					{meta.live ? ' viewers - Live since ' : ' views - '}
-					{format(new Date(meta.publishDate), 'PPP')}
+					{meta.live ? ' viewers' : ' views'}
+					{meta.publishDate ? (meta.live ? ' - Live since ' : ' - ') : ''}
+					{meta.publishDate && format(new Date(meta.publishDate), 'PPP')}
 				</Subtitle>
 				<Separator />
 				<InfoBox>

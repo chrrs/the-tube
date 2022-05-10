@@ -37,7 +37,7 @@ function ytsrToSearchResult(item: ytsr.Item): SearchResult | undefined {
 			id: item.id,
 			title: item.title,
 			description: item.description || undefined,
-			publishDate: item.uploadedAt || '1-1-1900',
+			publishDate: item.uploadedAt || undefined,
 			live: item.isLive,
 			views: item.views || 0,
 			lengthSeconds: (item.duration && parseDuration(item.duration)) || undefined,

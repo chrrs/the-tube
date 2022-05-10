@@ -15,7 +15,7 @@ export interface VideoMetadata {
 	id: string;
 	title: string;
 	description?: string;
-	publishDate: string;
+	publishDate?: string;
 	live: boolean;
 	views: number;
 	lengthSeconds?: number;
@@ -121,7 +121,7 @@ export async function getVideoInfo(id: string): Promise<VideoInfo> {
 			return {
 				id,
 				title: related.title,
-				publishDate: new Date(related.uploaded).toISOString(),
+				publishDate: related.uploadedDate && new Date(related.uploaded).toISOString(),
 				live: false,
 				views: related.views,
 				lengthSeconds: related.duration,

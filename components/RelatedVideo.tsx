@@ -31,8 +31,11 @@ const RelatedVideo: React.FC<{ meta: VideoMetadata }> = ({ meta }) => {
 					</Subtitle>
 					<Subtitle>
 						{formatNumber(meta.views)}
-						{' views - '}
-						{formatDistanceToNowStrict(new Date(meta.publishDate), { addSuffix: true })}
+						{meta.publishDate ? ' views - ' : ' views'}
+						{meta.publishDate &&
+							formatDistanceToNowStrict(new Date(meta.publishDate), {
+								addSuffix: true,
+							})}
 					</Subtitle>
 				</div>
 			</Wrapper>

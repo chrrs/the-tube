@@ -63,7 +63,7 @@ export interface RelatedStream {
 	uploaderName: string;
 	uploaderUrl: string;
 	uploaderAvatar: string;
-	uploadedDate: string;
+	uploadedDate?: string;
 	shortDescription: null;
 	duration: number;
 	views: number;
