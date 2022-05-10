@@ -1,3 +1,4 @@
+import { formatDistanceToNowStrict } from 'date-fns';
 import Link from 'next/link';
 import tw, { styled } from 'twin.macro';
 import { VideoResult } from '~/lib/search';
@@ -27,11 +28,21 @@ const VideoSearchResult: React.FC<{ result: VideoResult }> = ({ result }) => {
 				</ThumbnailWrapper>
 				<div>
 					<Title>{result.title}</Title>
-					<Subtitle>
-						{result.live && <LiveBadge>Live</LiveBadge>}
-						{formatNumber(result.views)}
-						{result.live ? ' viewers' : ` views - ${result.publishDate}`}
-					</Subtitle>
+					{result.upcoming && (
+						<Subtitle>
+							{'Scheduled '}
+							{formatDistanceToNowStrict(new Date(result.upcoming), {
+								addSuffix: true,
+							})}
+						</Subtitle>
+					)}
+					{!result.upcoming && (
+						<Subtitle>
+							{result.live && <LiveBadge>Live</LiveBadge>}
+							{formatNumber(result.views)}
+							{result.live ? ' viewers' : ` views - ${result.publishDate}`}
+						</Subtitle>
+					)}
 					<AuthorInfo>
 						<AuthorAvatar src={result.author.avatar} alt={result.author.name} />
 						<ChannelName verified={result.author.verified}>

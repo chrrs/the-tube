@@ -12,6 +12,7 @@ export type SearchResult = VideoResult | ChannelResult | ShelfResult;
 
 export interface VideoResult extends VideoMetadata {
 	type: 'video';
+	upcoming?: number;
 }
 
 export interface ExtendedChannelInfo extends ChannelInfo {
@@ -47,6 +48,7 @@ function ytsrToSearchResult(item: ytsr.Item): SearchResult | undefined {
 				avatar: item.author?.bestAvatar?.url || '',
 				verified: item.author?.verified || false,
 			},
+			upcoming: item.upcoming || undefined,
 		};
 	} else if (item.type === 'channel') {
 		return {
