@@ -17,11 +17,26 @@ export interface Stream {
 	uploaderSubscriberCount: number;
 	audioStreams: MediaStream[];
 	videoStreams: MediaStream[];
-	relatedStreams: never[];
+	relatedStreams: RelatedStream[];
 	subtitles: never[];
 	livestream: boolean;
 	proxyUrl: string;
 	chapters: Chapter[];
+}
+
+export interface RelatedStream {
+	url: string;
+	title: string;
+	thumbnail: string;
+	uploaderName: string;
+	uploaderUrl: string;
+	uploaderAvatar: string;
+	uploadDate: string;
+	shortDescription: string | null;
+	duration: number;
+	views: number;
+	uploaded: number;
+	uploaderVerified: boolean;
 }
 
 export interface MediaStream {

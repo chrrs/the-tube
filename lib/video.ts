@@ -18,7 +18,7 @@ export interface VideoMetadata {
 	publishDate: string;
 	live: boolean;
 	views: number;
-	lengthSeconds: number;
+	lengthSeconds?: number;
 	thumbnail: string;
 	author: ChannelInfo;
 }
@@ -115,8 +115,8 @@ export async function getVideoInfo(id: string): Promise<VideoInfo> {
 		hls: res.hls || undefined,
 		dash: res.dash || undefined,
 		lbry,
-		related: res.relatedStreams.map((related: any) => {
-			const id = related.url.split('?v=').pop();
+		related: res.relatedStreams.map((related) => {
+			const id = related.url.split('?v=').pop() as string;
 
 			return {
 				id,
@@ -127,7 +127,7 @@ export async function getVideoInfo(id: string): Promise<VideoInfo> {
 				lengthSeconds: related.duration,
 				thumbnail: related.thumbnail,
 				author: {
-					id: related.uploaderUrl.split('/').pop(),
+					id: related.uploaderUrl.split('/').pop() as string,
 					name: related.uploaderName,
 					avatar: related.uploaderAvatar,
 					verified: related.uploaderVerified,
